@@ -8,7 +8,7 @@ GET http://localhost:3000/productos
 GET http://localhost:3000/productos?categoria=Portátil
 
 ### Mostrar un producto por id
-GET http://localhost:3000/productos/60d21b4667d0d8992e610c85
+GET http://localhost:3000/productos/6668dabf65d4ba6d07f0866d
 
 ### Agregar un producto
 POST http://localhost:3000/productos/
@@ -21,18 +21,18 @@ content-type: application/json
 }
 
 ### Borrar un producto por id
-DELETE http://localhost:3000/productos/60d21b4667d0d8992e610c85
+DELETE http://localhost:3000/productos/6668dabf65d4ba6d07f0866b
 
 ### Modificar/Actualizar un producto parcialmente
-PATCH http://localhost:3000/productos/60d21b4667d0d8992e610c85
+PATCH http://localhost:3000/productos/6668dabf65d4ba6d07f0866d
 content-type: application/json
 
 {
-    "importe": 200000
+    "importe": 900000
 }
 
 ### Modificar/Actualizar un producto completamente
-PUT http://localhost:3000/productos/60d21b4667d0d8992e610c85
+PUT http://localhost:3000/productos/6668dabf65d4ba6d07f0866d
 content-type: application/json
 
 {
