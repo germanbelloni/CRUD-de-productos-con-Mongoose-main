@@ -41,6 +41,23 @@ content-type: application/json
     "categoria": "Tablet"
 }
 
+### Obtener productos con un importe mayor al especificado
+GET http://localhost:3000/productos/importes/mayor/100
+
+### Obtener productos con un importe menor al especificado
+GET http://localhost:3000/productos/importes/menor/10000
+
+### Obtener productos por nombre
+GET http://localhost:3000/productos/nombre/Tablet
+
+### Obtener productos por rango de precio
+GET http://localhost:3000/productos/rango/100000/142000
+
+
+
+### Obtener todas las categorías de productos
+GET http://localhost:3000/productos/categorias
+
 ### Obtener productos por rango de precio
 GET http://localhost:3000/productos/rango-precio?min=100000&max=200000
 
