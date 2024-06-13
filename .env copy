@@ -1,0 +1,4 @@
+MONGODB_URLSTRING = mongodb+srv://gerbelloni:germancito87@clustermongo.slxtyba.mongodb.net/
+PORT = 3000
+DATABASE_NAME = productos
+COLLECTION_NAME = productos

@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = process.env.PORT ?? 3000;
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Product = require("./src/mongooseModels");
@@ -23,7 +23,9 @@ app.get("/productos", async (req, res) => {
     : { categoria: { $regex: categoria, $options: "i" } };
   try {
     const productos = await Product.find(query);
-    res.json(productos);
+    productos
+      ? res.json(productos)
+      : res.status(404).json({ message: "No se encontraron productos" });
   } catch (error) {
     res.status(500).send("Error al buscar los productos");
   }
@@ -33,11 +35,9 @@ app.get("/productos", async (req, res) => {
 app.get("/productos/:id", async (req, res) => {
   const { id } = req.params;
   const producto = await Product.findById(id);
-  if (producto) {
-    return res.json(producto);
-  } else {
-    res.status(404).json({ message: "Producto no encontrado" });
-  }
+  producto
+    ? res.json(producto)
+    : res.status(404).json({ message: "Producto no encontrado" });
 });
 
 //Crea un nuevo producto
@@ -56,13 +56,11 @@ app.delete("/productos/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const resultado = await Product.findByIdAndDelete(id);
-    if (resultado) {
-      res.json({ message: "Producto borrado con exito" });
-    } else {
-      res
-        .status(404)
-        .json({ message: "No se encontro la pelicula para borrarla" });
-    }
+    resultado
+      ? res.json({ message: "Producto borrado con exito" })
+      : res
+          .status(404)
+          .json({ message: "No se encontro el producto para borrar" });
   } catch (error) {
     return res.status(500).json({ message: "Error al borrar la pelicula" });
   }
@@ -122,7 +120,9 @@ app.get("/productos/importes/mayor/:importe", async (req, res) => {
   const importe = parseFloat(req.params.importe);
   try {
     const productos = await Product.find({ importe: { $gt: importe } });
-    res.json(productos);
+    productos
+      ? res.json(productos)
+      : res.status(404).json({ message: "Error al encontrar los productos" });
   } catch (error) {
     res.status(500).json({ message: "Error al encontrar los productos" });
   }
@@ -133,7 +133,9 @@ app.get("/productos/importes/menor/:importe", async (req, res) => {
   const importe = parseFloat(req.params.importe);
   try {
     const productos = await Product.find({ importe: { $lt: importe } });
-    res.json(productos);
+    productos
+      ? res.json(productos)
+      : res.status(404).json({ message: "Error al encontrar los productos" });
   } catch (error) {
     res.status(500).json({ message: "Error al encontrar los productos" });
   }
@@ -143,7 +145,9 @@ app.get("/productos/importes/menor/:importe", async (req, res) => {
 app.get("/productos/categorias", async (req, res) => {
   try {
     const categorias = await Product.distinct("categoria");
-    res.json(categorias);
+    categorias
+      ? res.json(categorias)
+      : res.status(404).json({ message: "Error al buscar los productos" });
   } catch (error) {
     res
       .status(500)
@@ -159,7 +163,9 @@ app.get("/productos/nombre/:nombre", async (req, res) => {
     const nombreBuscado = await Product.find({
       nombre: new RegExp(nombre, "i"),
     });
-    res.json(nombreBuscado);
+    nombreBuscado
+      ? res.json(nombreBuscado)
+      : res.status(404).json({ message: "Error al buscar el producto" });
   } catch (error) {
     res.status(500).json({ message: "Error al buscar el producto" });
   }
@@ -167,12 +173,12 @@ app.get("/productos/nombre/:nombre", async (req, res) => {
 
 //Devuelve productos cuyo importe este dentro del rango especificado
 app.get("/productos/rango/:min/:max", async (req, res) => {
-  let { min } = parseFloat(req.params);
-  let { max } = parseFloat(req.params);
-
+  let { min, max } = parseFloat(req.params);
   try {
     const rango = await Product.find({ importe: { $gte: min, $lte: max } });
-    res.json(rango);
+    rango
+      ? res.json(rango)
+      : res.status(404).json({ message: "No se encontraron productos" });
   } catch (error) {
     res
       .status(500)

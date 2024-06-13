@@ -15,20 +15,20 @@ POST http://localhost:3000/productos/
 content-type: application/json
 
 {
-    "nombre": "Nuevo Producto",
-    "importe": 250000,
+    "nombre": "Samsung 10",
+    "importe": 650000,
     "categoria": "Smartphone"
 }
 
 ### Borrar un producto por id
-DELETE http://localhost:3000/productos/6668dabf65d4ba6d07f0866b
+DELETE http://localhost:3000/productos/666b3a419fde1cbc72f745b8
 
 ### Modificar/Actualizar un producto parcialmente
 PATCH http://localhost:3000/productos/6668dabf65d4ba6d07f0866d
 content-type: application/json
 
 {
-    "importe": 900000
+    "importe": 200000
 }
 
 ### Modificar/Actualizar un producto completamente
@@ -42,10 +42,10 @@ content-type: application/json
 }
 
 ### Obtener productos con un importe mayor al especificado
-GET http://localhost:3000/productos/importes/mayor/100
+GET http://localhost:3000/productos/importes/mayor/10000
 
 ### Obtener productos con un importe menor al especificado
-GET http://localhost:3000/productos/importes/menor/10000
+GET http://localhost:3000/productos/importes/menor/12000
 
 ### Obtener productos por nombre
 GET http://localhost:3000/productos/nombre/Tablet
