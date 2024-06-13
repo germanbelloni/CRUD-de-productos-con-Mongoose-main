@@ -1,14 +1,14 @@
 const express = require("express");
 const app = express();
 const port = 3000;
-const morgan = require('morgan')
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Product = require("./src/mongooseModels");
 const connectDB = require("./src/mongoose");
 connectDB();
 
 app.use(express.json());
-app.use(morgan('dev'))
+app.use(morgan("dev"));
 
 //Ruta principal
 app.get("/", (req, res) => {

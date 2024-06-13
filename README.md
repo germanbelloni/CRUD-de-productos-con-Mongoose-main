@@ -1,37 +1,79 @@
-# Enunciado del Ejercicio
+# API de productos
 
-En este ejercicio, vas a crear una API REST utilizando Express y Mongoose para gestionar una colección de productos tecnológicos. La API debe permitir realizar operaciones CRUD (Crear, Leer, Actualizar y Borrar) sobre los productos. Los productos ya vienen incluidos en el repositorio.
+Este proyecto implementa una API RESTful para la gestión de productos almacenados en una base de datos JSON. La API permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los productos, así como consultas avanzadas como filtrado por categoría, búsqueda por nombre y filtrado por rango de importe.
 
-## Requisitos
+## Tecnologías Utilizadas
 
-1. **Configurar el proyecto:**
-   - Inicializa un nuevo proyecto con `npm init`.
-   - Instala las dependencias necesarias: `express`, `mongoose`, y `morgan`.
+* Node.js
+* Express.js
+* MongoDB (con Mongoose para la integración)
 
-2. **Configurar Mongoose:**
-   - Crea una conexión a MongoDB usando Mongoose.
-   - Define un modelo de Mongoose para los productos tecnológicos con la estructura especificada.
+## Instalación
 
-3. **Crear el servidor Express:**
-   - Configura un servidor Express.
-   - Utiliza middleware para parsear JSON y loguear solicitudes HTTP.
+1. Clonar el repositorio:
+   git clone https://github.com/germanbelloni/CRUD-de-productos-con-Mongoose-main
+3. Instalar dependencias:
+   npm install
+4. Configuración de la base de datos:
+   Asegúrate de tener una instancia de MongoDB en ejecución. Puedes configurar la conexión en el archivo src/mongoose.js.
+5. Ejecutar la aplicación:
+   npm start
+   La aplicación estará disponible en [http://localhost:3000](http://localhost:3000).
 
-4. **Implementar las rutas de la API:**
-   - `GET /`: Devuelve un mensaje de bienvenida a la API.
-   - `GET /productos`: Devuelve todos los productos. Permite filtrar por categoría mediante query string.
-   - `GET /productos/:id`: Devuelve un producto por su ID.
-   - `POST /productos`: Crea un nuevo producto.
-   - `DELETE /productos/:id`: Elimina un producto por su ID.
-   - `PATCH /productos/:id`: Actualiza parcialmente un producto por su ID.
-   - `PUT /productos/:id`: Actualiza completamente un producto por su ID.
+Uso
 
-5. **Implementar 5 rutas adicionales:**
-   - `GET /productos/importes/mayor/:importe`: Devuelve los productos con un importe mayor al especificado.
-   - `GET /productos/importes/menor/:importe`: Devuelve los productos con un importe menor al especificado.
-   - `GET /productos/categorias`: Devuelve una lista de todas las categorías disponibles.
-   - `GET /productos/nombre/:nombre`: Devuelve los productos que coinciden con el nombre especificado (búsqueda parcial).
-   - `GET /productos/rango/:min/:max`: Devuelve los productos cuyo importe esté dentro del rango especificado.
+Endpoints
 
-## Entrega
-
-Sube tu código a un repositorio en GitHub y proporciona el enlace para revisión. Asegúrate de incluir instrucciones claras sobre cómo ejecutar tu proyecto en el archivo README.md del repositorio. Además, incluye un archivo `api.http` con las llamadas a la API para realizar las pruebas correspondientes.
+* GET /productos
+  Devuelve todos los productos. Permite filtrar por categoría mediante query string.
+  GET [http://localhost:3000/productos](http://localhost:3000/productos)
+  GET [http://localhost:3000/productos?categoria=Electrónicos]()
+* GET /productos/
+  Devuelve un producto por su ID.
+  GET [http://localhost:3000/productos/1]()
+* POST /productos
+  Crea un nuevo producto.
+  POST [http://localhost:3000/productos](http://localhost:3000/productos)
+  Content-Type: application/json
+  {
+  "nombre": "Nuevo Producto",
+  "descripcion": "Descripción del nuevo producto",
+  "categoria": "Electrónicos",
+  "precio": 399.99
+  }
+* DELETE /productos/
+  Elimina un producto por su ID.
+  DELETE [http://localhost:3000/productos/1]()
+* PATCH /productos/
+  Actualiza parcialmente un producto por su ID.
+  PATCH [http://localhost:3000/productos/1]()
+  Content-Type: application/json
+  {
+  "precio": 449.99
+  }
+* PUT /productos/
+  Actualiza completamente un producto por su ID.
+  PUT [http://localhost:3000/productos/1]()
+  Content-Type: application/json
+  {
+  "nombre": "Producto Actualizado",
+  "descripcion": "Nueva descripción del producto",
+  "categoria": "Electrónicos",
+  "precio": 449.99
+  }
+* GET /productos/importes/mayor/
+  Devuelve los productos con un importe mayor al especificado.
+  GET [http://localhost:3000/productos/importes/mayor/500]()
+* GET /productos/importes/menor/
+  Devuelve los productos con un importe menor al especificado.
+  GET [http://localhost:3000/productos/importes/menor/200]()
+* GET /productos/categorias
+  Devuelve una lista de todas las categorías disponibles.
+  GET [http://localhost:3000/productos/categorias]()
+* GET /productos/nombre/
+  Devuelve los productos que coinciden con el nombre especificado (búsqueda parcial).
+  GET [http://localhost:3000/productos/nombre/Laptop]()
+* GET /productos/rango/
+  /
+  Devuelve los productos cuyo importe esté dentro del rango especificado.
+  GET [http://localhost:3000/productos/rango/100/500]()
